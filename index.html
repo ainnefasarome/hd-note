@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Banghans · Hans Developer</title>
+<style>
+:root{--bg:#f0f2f5;--card:#fff;--text:#111b21;--muted:#667781;--line:#e9edef;--head:#008069;--green:#008069;--chip:#f0f2f5;--btn:#008069;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141a;--card:#111b21;--text:#e9edef;--muted:#8696a0;--line:#222d34;--head:#1f2c34;--green:#00a884;--chip:#202c33;--btn:#00a884;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b141a;--card:#111b21;--text:#e9edef;--muted:#8696a0;--line:#222d34;--head:#1f2c34;--green:#00a884;--chip:#202c33;--btn:#00a884;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5}
+.app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--bg)}
+.top{background:var(--head);color:#fff;display:flex;align-items:center;gap:16px;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 14px}
+.top span{flex:1;font-size:18px;font-weight:500}
+svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.card{background:var(--card);padding:16px}
+.card+.card{margin-top:8px}
+.hero{text-align:center;padding-top:24px}
+.av{width:112px;height:112px;border-radius:50%;background:var(--btn);color:#fff;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:500;letter-spacing:1px}
+h1{margin:0;font-size:22px;font-weight:500;line-height:1.3}
+.sub{margin:2px 0 0;color:var(--muted)}
+.num{margin:2px 0 16px;color:var(--muted);font-size:14px}
+.acts{display:flex;gap:8px}
+.act{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 0;color:var(--green);font:inherit;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer}
+.act:active{background:var(--chip)}
+.lbl{margin:0 0 6px;color:var(--green);font-size:14px;font-weight:500}
+.card p.t{margin:0}
+.chips{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.chip{background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:18px;padding:8px 14px;font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.sp{flex:1}
+.bar{position:sticky;bottom:0;background:var(--bg);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center}
+.fld{flex:1;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:0 14px;color:var(--muted)}
+.fld input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:16px;height:46px}
+.fld:focus-within{border-color:var(--green)}
+.send{width:48px;height:48px;border-radius:50%;border:0;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.err{display:none;margin:0;padding:0 16px 4px;color:#d9363e;font-size:13px;background:var(--bg)}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#202c33;color:#e9edef;padding:8px 16px;border-radius:18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+.foot{text-align:center;color:var(--muted);font-size:12px;padding:14px 0 4px}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<span>Info kontak</span>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+</div>
+<div class="card hero">
+<div class="av" aria-hidden="true">BS</div>
+<h1>Banghans</h1>
+<p class="sub">Hans Developer</p>
+<p class="num">+62 823-1387-7976</p>
+<div class="acts">
+<button class="act" id="bChat" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg>Chat</button>
+<button class="act" id="bShare" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Bagikan</button>
+<button class="act" id="bCopy" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Salin link</button>
+</div>
+</div>
+<div class="card">
+<p class="lbl">Tentang</p>
+<p class="t">Independen Vanilla Developer. Membuat aplikasi, website, dan proyek lain.</p>
+</div>
+<div class="card">
+<p class="lbl">Pesan cepat</p>
+<div class="chips">
+<button class="chip" type="button" data-t="Halo, saya mau bertanya.">Halo, saya mau bertanya</button>
+<button class="chip" type="button" data-t="Saya ingin pesan aplikasi atau website.">Saya ingin pesan aplikasi atau website</button>
+<button class="chip" type="button" data-t="Saya mau konsultasi.">Saya mau konsultasi</button>
+</div>
+<p class="foot">Hans Developer</p>
+</div>
+<div class="sp"></div>
+<p class="err" id="err" role="alert">Ketik pesan dulu sebelum mengirim.</p>
+<div class="bar">
+<label class="fld"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+<input id="msg" type="text" placeholder="Ketik pesan" autocomplete="off" aria-label="Pesan untuk Banghans"></label>
+<button class="send" id="send" type="button" aria-label="Kirim lewat WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+</div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+var NO="6282313877976",BASE="https://wa.me/"+NO;
+var msg=document.getElementById("msg"),err=document.getElementById("err"),toast=document.getElementById("toast"),tt;
+function say(t){toast.textContent=t;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on")},1800)}
+function go(u){var w=null;try{w=window.open(u,"_blank")}catch(e){}if(!w){location.href=u}}
+function kirim(){var v=msg.value.trim();if(!v){err.style.display="block";msg.focus();return}err.style.display="none";go(BASE+"?text="+encodeURIComponent(v))}
+document.getElementById("send").addEventListener("click",kirim);
+msg.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();kirim()}});
+msg.addEventListener("input",function(){err.style.display="none"});
+document.getElementById("bChat").addEventListener("click",function(){go(BASE)});
+document.querySelectorAll(".chip").forEach(function(b){b.addEventListener("click",function(){msg.value=b.getAttribute("data-t");err.style.display="none";msg.focus()})});
+function salin(t,ok){try{navigator.clipboard.writeText(t).then(function(){say(ok)},function(){say("Gagal menyalin")})}catch(e){say("Gagal menyalin")}}
+document.getElementById("bCopy").addEventListener("click",function(){salin(location.href,"Link disalin")});
+document.getElementById("bShare").addEventListener("click",function(){
+if(navigator.share){navigator.share({title:"Banghans · Hans Developer",url:location.href}).catch(function(){})}else{salin(location.href,"Link disalin")}});
+</script>
+</body>
+</html>
