@@ -11,14 +11,18 @@
 html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
 body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;-webkit-user-select:none;user-select:none}
 .app{position:fixed;top:0;left:0;right:0;max-width:480px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg)}
+.wall{position:absolute;inset:0;background-color:var(--wc);background-image:var(--wall);background-size:160px 160px;opacity:0;transition:opacity .28s ease}
+.stage{position:relative;z-index:1;flex:1;min-height:0;overflow:hidden}
+.v1,.v2{position:absolute;inset:0;display:flex;flex-direction:column;transition:opacity .28s ease,transform .28s ease,visibility 0s}
+.v2{opacity:0;transform:translateY(14px);visibility:hidden;pointer-events:none;transition:opacity .28s ease,transform .28s ease,visibility 0s .28s}
 .top{flex:none;background:var(--head);color:#fff;display:flex;align-items:center;gap:16px;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px}
 .top span{flex:1;font-size:18px;font-weight:500}
 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.chead{display:none;flex:none;align-items:center;gap:12px;background:var(--card);color:var(--text);padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px}
+.chead{flex:none;display:flex;align-items:center;gap:12px;background:var(--card);color:var(--text);padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px}
 .chead .ci{width:44px;height:44px;border-radius:50%;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:16px;flex:none}
 .chead .tx{flex:1;min-width:0}
 .chead .nm{margin:0;font-size:19px;font-weight:500;line-height:1.25}
-.chead .st{margin:0;font-size:14px;color:var(--muted);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chead .st{margin:0;font-size:13px;color:var(--muted);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card{background:var(--card);padding:clamp(8px,1.8dvh,16px) 16px}
 .card+.card{margin-top:clamp(4px,.8dvh,8px)}
 .hero{flex:none;text-align:center;padding-top:clamp(8px,2.2dvh,24px)}
@@ -37,44 +41,42 @@ h1{margin:0;font-size:clamp(18px,2.8dvh,22px);font-weight:500;line-height:1.3}
 .chip{background:var(--chip);color:var(--text);border:1px solid var(--line);border-radius:18px;padding:clamp(6px,1dvh,8px) 14px;font:inherit;font-size:14px;text-align:left;cursor:pointer;transition:background .15s,border-color .15s,transform .1s}
 .chip:active{transform:scale(.97);background:var(--press)}
 .chip.on{background:var(--press);border-color:var(--green)}
-.bar{flex:none;position:relative;background:var(--bg);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center}
-.fld{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:0 14px;color:var(--muted)}
-.fld input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:16px;height:46px;-webkit-user-select:text;user-select:text}
+.bar{flex:none;position:relative;z-index:1;width:100%;background:var(--bg);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;transition:background-color .28s ease}
+.fld{flex:1 1 0;min-width:0;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:0 14px;color:var(--muted);transition:border-color .2s}
+.fld input{flex:1 1 0;width:0;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:16px;height:46px;-webkit-user-select:text;user-select:text}
 .fld input.sw{animation:sw .18s ease-out}
 @keyframes sw{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
 .fld:focus-within{border-color:var(--green)}
 .fld .x{display:none}
-.send{width:48px;height:48px;border-radius:50%;border:0;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.send{flex:none;width:48px;height:48px;border-radius:50%;border:0;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background-color .28s ease}
 .send .ic-mic{display:none}
 .err{display:none;position:absolute;left:0;right:0;bottom:100%;margin:0;padding:3px 16px;color:#d9363e;font-size:13px;background:var(--bg)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#202c33;color:#e9edef;padding:8px 16px;border-radius:18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 @media (max-height:640px){.about{display:none}}
-.chat{background-color:var(--wc);background-image:var(--wall);background-size:160px 160px}
-.chat .top,.chat .hero,.chat .about,.chat .quick{display:none}
-.chat .chead{display:flex}
-.chat .bar{margin-top:auto;background:transparent}
-.chat .fld{border:0;box-shadow:0 1px 2px rgba(0,0,0,.14)}
+.chat .wall{opacity:1}
+.chat .v1{opacity:0;transform:translateY(-10px);visibility:hidden;pointer-events:none;transition:opacity .28s ease,transform .28s ease,visibility 0s .28s}
+.chat .v2{opacity:1;transform:none;visibility:visible;pointer-events:auto;transition:opacity .28s ease,transform .28s ease,visibility 0s}
+.chat .bar{background-color:transparent}
+.chat .fld{border-color:transparent;box-shadow:0 1px 2px rgba(0,0,0,.14)}
 .chat .fld input{height:52px;font-size:18px}
-.chat .fld .x{display:block}
+.chat .fld .x{display:block;animation:fi .28s ease both}
 .chat .send{width:52px;height:52px;background:var(--mic)}
 .chat:not(.has) .send .ic-mic{display:block}
 .chat:not(.has) .send .ic-send{display:none}
 :focus-visible{outline:2px solid var(--green);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){.fld input.sw{animation:none}.chip{transition:none}}
+@media (prefers-reduced-motion:reduce){.fld input.sw,.chat .fld .x{animation:none}.chip,.wall,.v1,.v2,.bar,.send{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="app" id="app">
+<div class="wall" aria-hidden="true"></div>
+<div class="stage">
+<div class="v1">
 <div class="top">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
 <span>Info kontak</span>
-<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-</div>
-<div class="chead">
-<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-<div class="ci" aria-hidden="true">BS</div>
-<div class="tx"><p class="nm">Banghans</p><p class="st">Halo, ada yang bisa kami bantu?</p></div>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
 </div>
 <div class="card hero">
@@ -98,6 +100,16 @@ h1{margin:0;font-size:clamp(18px,2.8dvh,22px);font-weight:500;line-height:1.3}
 <button class="chip" type="button" data-t="Halo, saya mau bertanya.">Halo, saya mau bertanya</button>
 <button class="chip" type="button" data-t="Saya ingin pesan aplikasi atau website.">Saya ingin pesan aplikasi atau website</button>
 <button class="chip" type="button" data-t="Saya mau konsultasi.">Saya mau konsultasi</button>
+</div>
+</div>
+</div>
+<div class="v2">
+<div class="chead">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<div class="ci" aria-hidden="true">BS</div>
+<div class="tx"><p class="nm">Banghans</p><p class="st">Halo, ada yang bisa kami bantu?</p></div>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+</div>
 </div>
 </div>
 <div class="bar">
