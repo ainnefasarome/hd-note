@@ -2,19 +2,23 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <title>Banghans · Hans Developer</title>
 <style>
-:root{--bg:#f0f2f5;--card:#fff;--text:#111b21;--muted:#667781;--line:#e9edef;--head:#008069;--green:#008069;--chip:#f0f2f5;--btn:#008069;--press:#d9dde0;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141a;--card:#111b21;--text:#e9edef;--muted:#8696a0;--line:#222d34;--head:#1f2c34;--green:#00a884;--chip:#202c33;--btn:#00a884;--press:#2a3942;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0b141a;--card:#111b21;--text:#e9edef;--muted:#8696a0;--line:#222d34;--head:#1f2c34;--green:#00a884;--chip:#202c33;--btn:#00a884;--press:#2a3942;color-scheme:dark}
+:root{--bg:#f0f2f5;--card:#fff;--text:#111b21;--muted:#667781;--line:#e9edef;--head:#008069;--green:#008069;--chip:#f0f2f5;--btn:#008069;--press:#d9dde0;--mic:#111b21;--wc:#efe7da;--wall:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='%23b08968' stroke-opacity='.3' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='24' cy='26' r='9'/%3E%3Cpath d='M70 20l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z'/%3E%3Crect x='112' y='14' width='26' height='18' rx='4'/%3E%3Cpath d='M120 32l-3 7 8-7'/%3E%3Cpath d='M26 74c0-6 9-6 9 0 0 5-9 11-9 11s-9-6-9-11c0-6 9-6 9 0z'/%3E%3Cpath d='M64 70h30v22H64z'/%3E%3Cpath d='M70 70v-5h18v5'/%3E%3Ccircle cx='128' cy='84' r='10'/%3E%3Cpath d='M124 84h8M128 80v8'/%3E%3Cpath d='M20 128h28M20 136h20'/%3E%3Ccircle cx='84' cy='132' r='7'/%3E%3Cpath d='M120 124l10 10M130 124l-10 10'/%3E%3C/svg%3E");color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141a;--card:#111b21;--text:#e9edef;--muted:#8696a0;--line:#222d34;--head:#1f2c34;--green:#00a884;--chip:#202c33;--btn:#00a884;--press:#2a3942;--mic:#00a884;--wc:#0b141a;--wall:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='24' cy='26' r='9'/%3E%3Cpath d='M70 20l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z'/%3E%3Crect x='112' y='14' width='26' height='18' rx='4'/%3E%3Cpath d='M120 32l-3 7 8-7'/%3E%3Cpath d='M26 74c0-6 9-6 9 0 0 5-9 11-9 11s-9-6-9-11c0-6 9-6 9 0z'/%3E%3Cpath d='M64 70h30v22H64z'/%3E%3Cpath d='M70 70v-5h18v5'/%3E%3Ccircle cx='128' cy='84' r='10'/%3E%3Cpath d='M124 84h8M128 80v8'/%3E%3Cpath d='M20 128h28M20 136h20'/%3E%3Ccircle cx='84' cy='132' r='7'/%3E%3Cpath d='M120 124l10 10M130 124l-10 10'/%3E%3C/svg%3E");color-scheme:dark}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
 body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;-webkit-user-select:none;user-select:none}
-.app{max-width:480px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.app{position:fixed;top:0;left:0;right:0;max-width:480px;margin:0 auto;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background-color:var(--bg)}
 .top{flex:none;background:var(--head);color:#fff;display:flex;align-items:center;gap:16px;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px}
 .top span{flex:1;font-size:18px;font-weight:500}
 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.chead{display:none;flex:none;align-items:center;gap:12px;background:var(--card);color:var(--text);padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px}
+.chead .ci{width:44px;height:44px;border-radius:50%;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:16px;flex:none}
+.chead .tx{flex:1;min-width:0}
+.chead .nm{margin:0;font-size:19px;font-weight:500;line-height:1.25}
+.chead .st{margin:0;font-size:14px;color:var(--muted);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .card{background:var(--card);padding:clamp(8px,1.8dvh,16px) 16px}
 .card+.card{margin-top:clamp(4px,.8dvh,8px)}
 .hero{flex:none;text-align:center;padding-top:clamp(8px,2.2dvh,24px)}
@@ -34,18 +38,28 @@ h1{margin:0;font-size:clamp(18px,2.8dvh,22px);font-weight:500;line-height:1.3}
 .chip:active{transform:scale(.97);background:var(--press)}
 .chip.on{background:var(--press);border-color:var(--green)}
 .bar{flex:none;position:relative;background:var(--bg);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center}
-.fld{flex:1;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:0 14px;color:var(--muted)}
+.fld{flex:1;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:26px;padding:0 14px;color:var(--muted)}
 .fld input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);font:inherit;font-size:16px;height:46px;-webkit-user-select:text;user-select:text}
 .fld input.sw{animation:sw .18s ease-out}
 @keyframes sw{from{opacity:.2;transform:translateY(5px)}to{opacity:1;transform:none}}
 .fld:focus-within{border-color:var(--green)}
+.fld .x{display:none}
 .send{width:48px;height:48px;border-radius:50%;border:0;background:var(--btn);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none}
+.send .ic-mic{display:none}
 .err{display:none;position:absolute;left:0;right:0;bottom:100%;margin:0;padding:3px 16px;color:#d9363e;font-size:13px;background:var(--bg)}
 .toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#202c33;color:#e9edef;padding:8px 16px;border-radius:18px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}
 .toast.on{opacity:1}
 @media (max-height:640px){.about{display:none}}
-.kb .about,.kb .acts,.kb .num,.kb .av{display:none}
-.kb .hero{padding-top:8px}
+.chat{background-color:var(--wc);background-image:var(--wall);background-size:160px 160px}
+.chat .top,.chat .hero,.chat .about,.chat .quick{display:none}
+.chat .chead{display:flex}
+.chat .bar{margin-top:auto;background:transparent}
+.chat .fld{border:0;box-shadow:0 1px 2px rgba(0,0,0,.14)}
+.chat .fld input{height:52px;font-size:18px}
+.chat .fld .x{display:block}
+.chat .send{width:52px;height:52px;background:var(--mic)}
+.chat:not(.has) .send .ic-mic{display:block}
+.chat:not(.has) .send .ic-send{display:none}
 :focus-visible{outline:2px solid var(--green);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){.fld input.sw{animation:none}.chip{transition:none}}
 </style>
@@ -55,6 +69,12 @@ h1{margin:0;font-size:clamp(18px,2.8dvh,22px);font-weight:500;line-height:1.3}
 <div class="top">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
 <span>Info kontak</span>
+<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+</div>
+<div class="chead">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+<div class="ci" aria-hidden="true">BS</div>
+<div class="tx"><p class="nm">Banghans</p><p class="st">Halo, ada yang bisa kami bantu?</p></div>
 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
 </div>
 <div class="card hero">
@@ -83,24 +103,43 @@ h1{margin:0;font-size:clamp(18px,2.8dvh,22px);font-weight:500;line-height:1.3}
 <div class="bar">
 <p class="err" id="err" role="alert">Ketik pesan dulu sebelum mengirim.</p>
 <label class="fld"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
-<input id="msg" type="text" placeholder="Ketik pesan" autocomplete="off" aria-label="Pesan untuk Banghans"></label>
-<button class="send" id="send" type="button" aria-label="Kirim lewat WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+<input id="msg" type="text" placeholder="Ketik pesan" autocomplete="off" aria-label="Pesan untuk Banghans">
+<svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 11.6l-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></svg>
+<svg class="x" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></label>
+<button class="send" id="send" type="button" aria-label="Kirim lewat WhatsApp"><svg class="ic-send" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><svg class="ic-mic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg></button>
 </div>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script>
 var NO="6282313877976",BASE="https://wa.me/"+NO;
 var app=document.getElementById("app"),msg=document.getElementById("msg"),err=document.getElementById("err"),toast=document.getElementById("toast"),tt;
-var chips=document.querySelectorAll(".chip");
+var chips=document.querySelectorAll(".chip"),vv=window.visualViewport,base=0,was=false;
 function say(t){toast.textContent=t;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove("on")},1800)}
 function go(u){var w=null;try{w=window.open(u,"_blank")}catch(e){}if(!w){location.href=u}}
-function mark(){chips.forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===msg.value)})}
+function vh(){return vv?vv.height:window.innerHeight}
+function zoomed(){return !!vv&&vv.scale>1.01}
+function mark(){chips.forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===msg.value)});app.classList.toggle("has",msg.value.length>0)}
+function fit(){
+if(zoomed()){app.style.height="";app.style.transform="";return}
+var h=vh(),foc=document.activeElement===msg;
+if(!foc)base=h;
+app.style.height=h+"px";
+app.style.transform=(vv&&vv.offsetTop)?"translateY("+vv.offsetTop+"px)":"";
+var open=foc&&base>0&&h<base*0.85;
+app.classList.toggle("chat",open);
+msg.placeholder=open?"Pesan":"Ketik pesan";
+if(open){was=true}else if(was&&foc&&h>=base*0.95){was=false;msg.blur()}else if(!foc){was=false}
+}
 function kirim(){var v=msg.value.trim();if(!v){err.style.display="block";msg.focus();return}err.style.display="none";go(BASE+"?text="+encodeURIComponent(v))}
-document.getElementById("send").addEventListener("click",kirim);
+document.getElementById("send").addEventListener("click",function(){if(app.classList.contains("chat")&&!msg.value.trim()){msg.focus();return}kirim()});
 msg.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();kirim()}});
 msg.addEventListener("input",function(){err.style.display="none";mark()});
-msg.addEventListener("focus",function(){app.classList.add("kb")});
-msg.addEventListener("blur",function(){app.classList.remove("kb")});
+msg.addEventListener("pointerdown",function(){if(!zoomed())base=vh()});
+msg.addEventListener("focus",fit);
+msg.addEventListener("blur",function(){setTimeout(fit,0)});
+if(vv){vv.addEventListener("resize",fit);vv.addEventListener("scroll",fit)}
+window.addEventListener("resize",fit);
+window.addEventListener("orientationchange",function(){setTimeout(fit,300)});
 document.getElementById("bChat").addEventListener("click",function(){go(BASE)});
 chips.forEach(function(b){
 b.addEventListener("mousedown",function(e){e.preventDefault()});
@@ -109,6 +148,7 @@ function salin(t,ok){try{navigator.clipboard.writeText(t).then(function(){say(ok
 document.getElementById("bCopy").addEventListener("click",function(){salin(location.href,"Link disalin")});
 document.getElementById("bShare").addEventListener("click",function(){
 if(navigator.share){navigator.share({title:"Banghans · Hans Developer",url:location.href}).catch(function(){})}else{salin(location.href,"Link disalin")}});
+fit();
 </script>
 </body>
 </html>
